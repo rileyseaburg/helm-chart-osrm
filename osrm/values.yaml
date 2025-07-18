@@ -86,14 +86,24 @@ tolerations: []
 affinity: {}
 
 livenessProbe: null
-#  httpGet:
-#    path: /route/v1/driving/13.388860,52.517037;13.385983,52.496891
-#    port: http
+  # httpGet:
+  #   path: /route/v1/driving/13.388860,52.517037;13.385983,52.496891
+  #   port: http
+  #   failureThreshold: 5
+  #   initialDelaySeconds: 10
+  #   periodSeconds: 30
+  #   successThreshold: 1
+  #   timeoutSeconds: 10
 
 readinessProbe: null
-#  httpGet:
-#    path: /route/v1/driving/13.388860,52.517037;13.385983,52.496891
-#    port: http
+  # httpGet:
+  #   path: /route/v1/driving/13.388860,52.517037;13.385983,52.496891
+  #   port: http
+  #   failureThreshold: 5
+  #   initialDelaySeconds: 10
+  #   periodSeconds: 30
+  #   successThreshold: 1
+  #   timeoutSeconds: 10
 
 # Persistence allows you to store downloaded maps in the persistent store.
 # Enable & configure this if you don't want to download the same maps each
@@ -149,7 +159,8 @@ map:
     # An arbitrary version for the map at the uri. Any versioning scheme can be used. This field is used only to create
     # corresponding directory within the volume and to decide whether to download a new version of the map.
     #
-    # Example: "20200226-1"
+    # Example: "v1" 
+    # Always give v1, v2 and so on, the older version data will be removed if new versions are there
     version: ""
 
     # HTTP(S) uri to download map.
@@ -175,7 +186,10 @@ map:
         image: bash:5
         imagePullPolicy: IfNotPresent
         command:
-          - /scripts/download.sh
+          - /bin/sh
+          - -c
+          - |
+            /scripts/download.sh && cd /data/maps && ls -1d v*/ 2>/dev/null | sort -V | head -n -1 | xargs -r rm -rf -- && echo "Done Removal!!"
         volumeMounts:
           - name: config-files
             mountPath: /scripts
