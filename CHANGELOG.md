@@ -1,5 +1,15 @@
 # Change log
 
+## [0.6.0] - 2024-12-19
+
+- Update OSRM to version 6.0.0. This major release includes:
+  - Obstacle Support: Generic support for obstacles enhances routing flexibility
+  - Pedestrian Routing: Routes now include highways marked as platforms
+  - Performance Boosts: Micro-optimizations improve API performance across Route, Table, Trip, and Match
+  - Modernized Build System: Upgraded to Clang 15, Conan 2.x, and Debian Bookworm for better compatibility
+  - NodeJS Updates: Transitioned to Node-API, dropping support for older Node versions
+  - Enhanced Testing: Comprehensive CI updates and new unit tests ensure reliability
+
 ## [0.5.0] - 2022-06-07
 
 - Update Ingress to `networking.k8s.io/v1`. Note that this requires Kubernetes API v1.19+.

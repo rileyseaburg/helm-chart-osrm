@@ -8,7 +8,7 @@ Notable features:
 others (AWS S3, etc) incoming.
 - 🖴 Runs as a StatefulSet so each instance keeps its own maps in PersistentVolume.
 
-By default, this chart deploys [osrm-routed](http://project-osrm.org/docs/v5.22.0/api/) server, but you can replace
+By default, this chart deploys [osrm-routed](http://project-osrm.org/docs/v6.0.0/api/) server, but you can replace
 it with your own implementation (e.g. based on `libosrm`) if you want. 
 
 ## Install
